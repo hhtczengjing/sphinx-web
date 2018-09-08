@@ -39,7 +39,7 @@
         var that = this;
         this.loading = true;
         var name = this.$route.params['name'];
-        ajax.get('/table/' + name, {}, function (data) {
+        ajax.get('table/' + name, {}, function (data) {
           that.tableData = data.data;
           that.columns = data.column;
           that.loading = false;
@@ -48,7 +48,7 @@
       executeSql() {
         var that = this;
         this.loading = true;
-        ajax.post('/execute', {sql: this.sql}, function (data) {
+        ajax.post('execute', {sql: this.sql}, function (data) {
           if (data.type === '1') {
             that.tableData = data.data;
             that.columns = data.column;

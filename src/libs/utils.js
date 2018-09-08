@@ -17,7 +17,20 @@ util.getUrlParams = function(){
     return theRequest;
 };
 util.getContextPath = function(){
-    return "http://127.0.0.1:8888";
+    let debug = process.env.NODE_ENV !== 'production';
+    if (debug) {
+      return "http://127.0.0.1:8888/";
+    }
+    else {
+      var url = document.location.toString();
+      var scheme = window.location.protocol.toString();
+      var host = window.location.host.toString();
+      var pathname = window.location.pathname.toString();
+      var server = scheme + "//" + host + "/" + pathname.split("/")[1];
+      console.log(server);
+      return server;
+    }
+    return url;
 };
 /*字符串转换为布尔型*/
 util.getBoolean = function (str){
