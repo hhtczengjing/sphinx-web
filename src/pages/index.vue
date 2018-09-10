@@ -1,12 +1,13 @@
 <template>
   <div id="container">
     <el-row :gutter="20">
-      <el-col :span="21">
+      <el-col :span="18">
         <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入SQL语句" v-model="sql">
         </el-input>
       </el-col>
-      <el-col :span="3">
-        <el-button @click.native="executeSql" type="primary" size="large" icon="search">查询</el-button>
+      <el-col :span="6">
+        <el-button @click.native="executeSql" type="primary" size="medium" icon="search">查询</el-button>
+        <el-button @click.native="downloadDB" type="primary" size="medium" icon="search">下载</el-button>
       </el-col>
     </el-row>
     <el-row :gutter="20">
@@ -26,6 +27,7 @@
 
 <script>
   import ajax from "../libs/ajax.js";
+  import util from '../libs/utils.js';
 
   export default {
     data() {
@@ -48,6 +50,11 @@
           that.columns = data.column;
           that.loading = false;
         });
+      },
+      downloadDB() {
+        var ctx = util.getContextPath();
+        var url = ctx + 'download';
+        window.open(url);
       },
       executeSql() {
         var that = this;
